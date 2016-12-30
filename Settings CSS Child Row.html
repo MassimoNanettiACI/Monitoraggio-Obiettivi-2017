@@ -26,10 +26,12 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     
-    <!-- DataTables Filter Plugin-->
+     <!-- DataTables Filter Plugin-->
     <!--script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.12/filtering/row-based/range_dates.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.12/filtering/row-based/range_numbers.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.12/filtering/row-based/TableTools.ShowSelectedOnly.js"></script-->
+    
+    
     
     
     <!-- PDFmake (for Buttons Extensions)-->
@@ -41,3 +43,20 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>
     
+
+    <!-- Style for child button -->
+
+    <style>  
+    td.details-control {
+    background: url('https://next.datatables.net/examples/resources/details_open.png') no-repeat center center;
+    cursor: pointer;
+    }
+    tr.shown td.details-control {
+    background: url('https://next.datatables.net/examples/resources/details_close.png') no-repeat center center;
+    }   
+    </style>
+
+    <!-- Child Row plugin settings -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>

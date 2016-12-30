@@ -62,10 +62,9 @@ var mainObject = {
       }
     };
     mainObject.init(); // aziona il metodo per assegnare l'array di Objects alla proprietà "table"
-    
 //  var JSONdata = JSON.stringify(mainObject)
 //   Logger.log(JSONdata)
-   Logger.log(mainObject)
+ Logger.log(mainObject);
  return mainObject // il risultato viene restituito come Object e non come JSON stringify 
 // return JSONdata  // il risultato viene restituito come JSON stringify
 }

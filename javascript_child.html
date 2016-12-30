@@ -1,14 +1,10 @@
 <script>
 /* 
-riferimento: http://www.gyrocode.com/articles/jquery-datatables-responsive-and-select-extensions/
-
 estensione Responsive per DataTable jQuery è un ottimo strumento per risolvere 
 il problema della visualizzazione di grandi quantità di dati 
 tabellari per i dispositivi a schermo più piccoli. 
-Tuttavia il suo uso con altre estensioni come Select estensione richiede una gestione speciale.
 */
-
-function renderTable(){
+    function renderTable(){
 
        $('#myTb').empty();
 
@@ -17,49 +13,50 @@ function renderTable(){
         .readData()
   }    
        window.onReadData = function(dataObject){
+      // console.log("L'oggetto restituito dalla funzione " + dataObject)
 
-$(document).ready(function (){
+      //La funzione readData passa un Oggetto con key = "table" e value uguale ad un Array di Oggetti: 
+      //["table": [{"col1":"data1", "col2":"data2", ...., "coln":"dataN"}, ...}]}
+      
+      // configurazione avanzata: 
+     $(document).ready(function (){
+  
       var myTb = $('#myTb').DataTable({
+
       data: dataObject.table,
-      // ajax: 'https://api.myjson.com/bins/qgcu',
-      responsive: {
-        details: {
-           type: 'column',
-           target: 0
-        }
-      },
-       responsive: true,
+      
+     // se nel DOM esiste solo un tag <table> senza <thead>
+     // si possono visualizzare liberamente le colonne che si vogliono 
+     // cambiando l'ordine degli elementi in columns, cambia l'ordine di visualizzazione in tabella 
+       
        scrollY:'50vh', // abilita la barra di scorrimento verticale all'interno della tabella 
        scrollCollapse: true,
        scrollX: true, // abilita la barra di scorrimento orizzontale all'interno della tabella 
        paging: true, // abilita disabilita la paginazione della tabella
        ordering: true, // abilita disabilita l'ordinamento nelle colonne
+       // order: [[0,"asc"],[1,"desc"],[2,"asc"]], // configura le regole di ordinamento per colonna
+
+      responsive: [ true, { details: { type: 'column', target: 0 } }, ],
       
-      columnDefs: [
-         {
-           data: null,
-           defaultContent: '',
-           className: 'control',
-           orderable: false,
-           targets: 0
-         }      
-      ],
       columns: [ 
-         { data: null }, 
-         { data: [0] },
-         { data: [1] },
-         { data: [2] },
-         { data: [3] },
-         { data: [4] },
-         { data: [5] }
-      ],
-      select: {
-         style: 'multi',
-         selector: 'td:not(.control)'
-      },
-      order: [[1, 'asc']]
-   });   
-});
+         { data: null, className: 'details-control', orderable: false,  defaultContent: '' }, // pulsante child-row-control
+         { data: 'Indirizzo email', title: "Account"},
+         { data: 'dataEventoDatatables', title: "Events Data" }, 
+         { data: 'Località', title: "Località"},
+         { data: 'Scelta contesto', title: "Obiettivo"},
+         { data: 'Update', title: "Modifica"},  
+         ],
+      columnDefs: [ 
+        { targets: '_all', visible: true, "searchable": true },
+      // colonna Modifica          
+        { targets: [5], render: function ( data, type, row) {
+              return '<a href="'+data+'" target=\"_blank\" align="center"><button>Edit</button></a>'; } },
+        ],    
+      });   
+  });
+
+
+}  // closure of window.onReadData = function(dataObject){ ..
 
 // ****************** FUNZIONE CHE SOSTITUISCE LE AUTOPOPUP DI DEFAULT PER GLI ALERT *******************************    
  function autoPopup(alertMessage) {
