@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <!-- configurazione delle librerie: "Settings.html"  -->
+    <?!= HtmlService.createHtmlOutputFromFile('Settings CSS').getContent(); ?>
+
+      <style>
+       #resizable { width: 95%; height: auto; padding: 0.5em; }
+       #resizable h1 { text-align: center; margin: 0; }
+      </style>
+  </head>
+<!-- *********************************************************************************************************  -->
+<div id="resizable" class="container-fluid ui-widget-content">
+  <div class="jumbotron">
+     <h1>Monitoraggio Progetti/Obiettivi SSI 2017</h1>
+    <p align = "center">Nel campo <em>Search:</em> filtra con il criterio desiderato
+    <br>
+    per es. inserendo una Località e/o un account <em>spazio</em> = <em>"Viterbo m.volpi@aci.it"</em>
+    <br>
+    esporta poi il la tabella filtrata nel formato desiderato (PDF, COPY, CSV) </p>
+  </div>
+<body onload="renderTable()"> <!--carica i dati nella tabella-->
+  <div class="table-responsive">
+    <div class="bodycontainer scrollable">
+    <table id="myTb" class="table table-striped table-bordered table display dataTable" cellpadding="0" cellspacing="0" border="0">
+    </table>
+  </div>
+</div>
+</body>
+</div>
+</html>
+
+<!-- *********************************************************************************************************  -->
+<!-- chiamata al file JS lato Client -->
+<?!= HtmlService.createHtmlOutputFromFile('javascript').getContent(); ?>
+
+
+

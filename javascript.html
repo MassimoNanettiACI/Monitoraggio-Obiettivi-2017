@@ -1,0 +1,147 @@
+<script>
+// ****************** FUNZIONE CHE RENDERIZZA LA TABELLA FILTRATA CON IL PLUG_IN DATATABLES ****************************
+    function renderTable(){
+
+       $('#myTb').empty();
+
+        google.script.run
+        .withSuccessHandler(onReadData)
+        .readData()
+  }    
+       window.onReadData = function(dataObject){
+      //  console.log("L'oggetto restituito dalla funzione " + dataObject)
+
+      //La funzione readData passa un Oggetto con key = "table" e value uguale ad un Array di Oggetti: 
+      //["table": [{"col1":"data1", "col2":"data2", ...., "coln":"dataN"}, ...}]}
+      
+      // configurazione avanzata: 
+     $(document).ready(function (){
+      var myTb = $('#myTb').DataTable({
+        // jQueryUI: true,
+        // "sPaginationType": full_numbers,
+        data: dataObject.table,
+      
+     // se nel DOM esiste solo un tag <table> senza <thead>
+     // si possono visualizzare liberamente le colonne che si vogliono 
+     // cambiando l'ordine degli elementi in columns, cambia l'ordine di visualizzazione in tabella 
+       responsive: true,
+       scrollY:'50vh', // abilita la barra di scorrimento verticale all'interno della tabella 
+       scrollCollapse: true,
+       scrollX: true, // abilita la barra di scorrimento orizzontale all'interno della tabella 
+       paging: true, // abilita disabilita la paginazione della tabella
+       ordering: true, // abilita disabilita l'ordinamento nelle colonne
+       // order: [[0,"asc"],[1,"desc"],[2,"asc"]], // configura le regole di ordinamento per colonna
+       columns: [
+
+     /*    { data: 'Informazioni cronologiche', title: "Informazioni cronologiche"}, */
+          { data: 'Indirizzo email', title: "Account"},
+          { data: 'dataEventoDatatables', title: "Events Data" }, 
+          { data: 'Località', title: "Località"},
+          { data: 'Scelta contesto', title: "Obiettivo"},
+          { data: 'Ambito attività 1', title: "Contesto 1"},
+          { data: 'Tipo 1', title: "Tipo 1"},
+          { data: 'Documento 1 ', title: "Documento 1" }, // can be null or undefined
+          { data: 'Ambito attività 2', title: "Contesto 2"},
+          { data: 'Tipo 2', title: "Tipo 2"},
+          { data: 'Documento 2', title: "Documento 2" }, 
+          { data: 'Update', title: "Modifica"},  
+          
+        //  { data: 'null', defaultContent: "<button>Edit</button>" }
+          ],
+          
+        columnDefs: [ 
+        { targets: '_all', visible: true, "searchable": true },
+        // colonna Documento 1    
+        { targets: [6], render: function ( data, type, row) { 
+          if (data != "" ) { 
+          return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
+          else
+          return ('')} },
+        // colonna Documento 2                      
+        { targets: [9], render: function ( data, type, row) {
+          if (data != "" ) {        
+          return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
+          else
+          return ('') } },
+        // colonna Modifica          
+         { targets: [10], render: function ( data, type, row) {
+           return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://int-dir.s3.amazonaws.com/uploads/3191_3191_google_forms_logo.png" width="30" height="30"></a>'; } },
+         // colonna Data Events  
+         /*{ targets: [11], render: function ( data, type, row) { 
+           if (data != "") { 
+           var anyString = data.substring(data.lenght -4);
+           return anyString } } },*/
+
+       ],
+       
+       // Extensions (Buttons, Filtering, ecc)
+
+// filtri di colonna sul footer (da far funzionare )
+
+       //**************************************************************************     
+      
+      initComplete: function () {
+         var api = this.api();
+         
+         // filtri di colonna sul footer (da far funzionare )
+  
+         api.columns().every( function () {
+           var column = this;
+           console.log(column)
+           var select = $('<select><option value=""></option></select>')
+             .appendTo( $(column.footer()).empty() )
+             .on( 'change', function () {
+               var val = $.fn.dataTable.util.escapeRegex(
+                 $(this).val()
+               );
+               column
+                  .search( val ? '^'+val+'$' : '', true, false )
+                  .draw();
+             } );
+         
+             column.data().unique().sort().each( function ( d, j ) {
+               select.append( '<option value="'+d+'">'+d+'</option>' )
+             } );   
+   
+         } );
+// *********************************** bottone PDF (OK !)
+
+         new $.fn.dataTable.Buttons(api, {
+           buttons: [
+             'pdfHtml5', 
+             'copyHtml5', 
+             'csvHtml5', 
+             
+           ]
+         });
+         api.buttons().container().appendTo( '#' + api.table().container().id + ' .col-sm-6:eq(0)' );
+       }
+    });
+ });
+};
+
+// ****************** FUNZIONE CHE SOSTITUISCE LE AUTOPOPUP DI DEFAULT PER GLI ALERT *******************************    
+ function autoPopup(alertMessage) {
+  var w = 400
+  var h = 200
+  var left = (screen.width/2)-(w/2);
+  var top = (screen.height/2)-(h/2);
+  var stili = "top="+top+", left="+left+", width="+w+", height="+h+", toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no";
+  var testo = window.open("", "", stili);
+    
+  testo.document.write("<html>\n");
+  testo.document.write(" <head>\n");
+  testo.document.write("  <title>Operazione non valida</title>\n");
+  var style= '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'
+  testo.document.write(style)
+  testo.document.write("  <basefont size=2 face=Arial>\n");
+  testo.document.write(" </head>\n");
+  testo.document.write("<body topmargin=50>\n");
+  testo.document.write("<div align=center><br>"+ alertMessage +"</a></div>\n");
+  var buttonHtml = "<input type='button' class='btn btn-secondary' name='OK' value='OK' onclick='window.close()'>"
+  testo.document.write("<div align=center><br>"+ buttonHtml +"</a></div>\n");
+  testo.document.write("</body>\n");
+  testo.document.write("</html>");
+ }
+</script>
+

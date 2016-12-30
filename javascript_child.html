@@ -1,0 +1,87 @@
+<script>
+/* 
+riferimento: http://www.gyrocode.com/articles/jquery-datatables-responsive-and-select-extensions/
+
+estensione Responsive per DataTable jQuery è un ottimo strumento per risolvere 
+il problema della visualizzazione di grandi quantità di dati 
+tabellari per i dispositivi a schermo più piccoli. 
+Tuttavia il suo uso con altre estensioni come Select estensione richiede una gestione speciale.
+*/
+
+function renderTable(){
+
+       $('#myTb').empty();
+
+        google.script.run
+        .withSuccessHandler(onReadData)
+        .readData()
+  }    
+       window.onReadData = function(dataObject){
+
+$(document).ready(function (){
+      var myTb = $('#myTb').DataTable({
+      data: dataObject.table,
+      // ajax: 'https://api.myjson.com/bins/qgcu',
+      responsive: {
+        details: {
+           type: 'column',
+           target: 0
+        }
+      },
+       responsive: true,
+       scrollY:'50vh', // abilita la barra di scorrimento verticale all'interno della tabella 
+       scrollCollapse: true,
+       scrollX: true, // abilita la barra di scorrimento orizzontale all'interno della tabella 
+       paging: true, // abilita disabilita la paginazione della tabella
+       ordering: true, // abilita disabilita l'ordinamento nelle colonne
+      
+      columnDefs: [
+         {
+           data: null,
+           defaultContent: '',
+           className: 'control',
+           orderable: false,
+           targets: 0
+         }      
+      ],
+      columns: [ 
+         { data: null }, 
+         { data: [0] },
+         { data: [1] },
+         { data: [2] },
+         { data: [3] },
+         { data: [4] },
+         { data: [5] }
+      ],
+      select: {
+         style: 'multi',
+         selector: 'td:not(.control)'
+      },
+      order: [[1, 'asc']]
+   });   
+});
+
+// ****************** FUNZIONE CHE SOSTITUISCE LE AUTOPOPUP DI DEFAULT PER GLI ALERT *******************************    
+ function autoPopup(alertMessage) {
+  var w = 400
+  var h = 200
+  var left = (screen.width/2)-(w/2);
+  var top = (screen.height/2)-(h/2);
+  var stili = "top="+top+", left="+left+", width="+w+", height="+h+", toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no";
+  var testo = window.open("", "", stili);
+    
+  testo.document.write("<html>\n");
+  testo.document.write(" <head>\n");
+  testo.document.write("  <title>Operazione non valida</title>\n");
+  var style= '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'
+  testo.document.write(style)
+  testo.document.write("  <basefont size=2 face=Arial>\n");
+  testo.document.write(" </head>\n");
+  testo.document.write("<body topmargin=50>\n");
+  testo.document.write("<div align=center><br>"+ alertMessage +"</a></div>\n");
+  var buttonHtml = "<input type='button' class='btn btn-secondary' name='OK' value='OK' onclick='window.close()'>"
+  testo.document.write("<div align=center><br>"+ buttonHtml +"</a></div>\n");
+  testo.document.write("</body>\n");
+  testo.document.write("</html>");
+ }
+</script>
