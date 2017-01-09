@@ -1,49 +1,37 @@
 <script>
-//  funzione di formattazione per i dettagli della riga - modificare dove è necessario
-   function format () {
-    // `dataObject` is the original data object for the row
-   return   { 
-      columns: [ 
-         { data: 'Ambito attività 1', title: "Contesto 1", className: 'none'},
-         { data: 'Tipo 1', title: "Tipo 1", className: 'none'},
-         { data: 'Documento 1 ', title: "Documento 1", className: 'none' }, // can be null or undefined
-         { data: 'Ambito attività 2', title: "Contesto 2", className: 'none'},
-         { data: 'Tipo 2', title: "Tipo 2", className: 'none'},
-         { data: 'Documento 2', title: "Documento 2", className: 'none' }, 
-         ],
-      columnDefs: [ 
-        // colonna Documento 1    
-        { targets: [3], render: function ( data, type, row) { 
-          if (data != "" ) { 
-          return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
-          else
-          return ('')} },
-        // colonna Documento 2                      
-        { targets: [6], render: function ( data, type, row) {
-          if (data != "" ) {        
-          return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
-          else
-          return ('') } },
-        ],    
-     },),
-     },),
-     }, } // closure of "function format (dataObject) {.."
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Contesto 1:</td>'+
+            '<td>'+d."Attivita1"+'</td>'+
+        '</tr>'+
+    '</table>';
+}
+</script>
 
-  //  ********************* gestione pulsante child-row *****************
-  //  Add event listener for opening and closing details
-  $('#myTb tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
- 
-        if ( row.child.isShown() ) { 
-            row.child.hide(); // This row is already open - close it
-            tr.removeClass('shown');
-        }
-        else {      
-        row.child( format(row.data()) ).show(); // Open this row
-        tr.addClass('shown');
-        }
-   } )
+<script>
+//  funzione di formattazione per i dettagli della riga - modificare dove è necessario
+   function format (d) {
+   // `d` is the original data object for the row
+   var childRow = $('tr').DataTable({
+
+      data: d.table,
+      { 
+      columns: [ 
+         { data: 'Attivita1', title: "Contesto 1" },
+         { data: 'Tipo1', title: "Tipo 1", className: 'shown'},
+         { data: 'Documento 1 ', title: "Documento 1", className: 'shown' }, // can be null or undefined
+         { data: 'Attivita2', title: "Contesto 2", className: 'shown'},
+         { data: 'Tipo2', title: "Tipo 2", className: 'shown'},
+         { data: 'Documento2', title: "Documento 2", className: 'shown' }, 
+         ],
+   
+     },
+     },),
+     } 
+     Logger.log(childRow);
+     return childRow ;
    
 </script> 
    

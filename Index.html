@@ -3,12 +3,9 @@
   <head>
     <base target="_top">
     <!-- configurazione delle librerie: "Settings.html"  -->
-    <?!= HtmlService.createHtmlOutputFromFile('Settings CSS Child Row').getContent(); ?>
+    <?!= HtmlService.createHtmlOutputFromFile('Settings CSS').getContent(); ?>
 
-      <style>
-       #resizable { width: 95%; height: auto; padding: 0.5em; }
-       #resizable h1 { text-align: center; margin: 0; }
-      </style>
+
   </head>
 <!-- *********************************************************************************************************  -->
 <div id="resizable" class="container-fluid ui-widget-content">
@@ -18,13 +15,16 @@
     <br>
     per es. inserendo una Località e/o un account <em>spazio</em> = <em>"Viterbo m.volpi@aci.it"</em>
     <br>
-    esporta poi il la tabella filtrata nel formato desiderato (PDF, COPY, CSV) </p>
+    esporta poi il la tabella filtrata nel formato desiderato (PDF, COPY, CSV) 
+    <br>
+    Per inserire nuovi contenuti utilizza il 
+    <a href="https://docs.google.com/a/aci.it/forms/d/e/1FAIpQLSeiJnA5zt7cUDn7FduNEKLoBeQ_A_SS1L1-hxMRK6nMj679gg/viewform"><b>modulo</b></a>
+    </p>
   </div>
 <body onload="renderTable()"> <!--carica i dati nella tabella-->
   <div class="table-responsive">
     <div class="bodycontainer scrollable">
-    <table id="myTb" class="table table-striped table-bordered table display dataTable" cellpadding="0" cellspacing="0" border="0" width="100%">
-    
+    <table id="myTb" class="table tbody table-striped table-bordered display dataTable" cellpadding="0" cellspacing="0" border="0" width="100%">
     </table>
   </div>
 </div>
@@ -34,7 +34,7 @@
 
 <!-- *********************************************************************************************************  -->
 <!-- chiamata al file JS lato Client -->
-<?!= HtmlService.createHtmlOutputFromFile('javascript_child').getContent(); ?>
+<?!= HtmlService.createHtmlOutputFromFile('javascript').getContent(); ?>
 
 
 
