@@ -4,6 +4,7 @@
     <base target="_top">
     <!-- configurazione delle librerie: "Settings.html"  -->
     <?!= HtmlService.createHtmlOutputFromFile('Settings CSS').getContent(); ?>
+    <!-- ?!= HtmlService.createHtmlOutputFromFile('Settings CSS Child Row').getContent(); ? -->
 
 
   </head>
@@ -18,7 +19,7 @@
     esporta poi il la tabella filtrata nel formato desiderato (PDF, COPY, CSV) 
     <br>
     Per inserire nuovi contenuti utilizza il 
-    <a href="https://docs.google.com/a/aci.it/forms/d/e/1FAIpQLSeiJnA5zt7cUDn7FduNEKLoBeQ_A_SS1L1-hxMRK6nMj679gg/viewform"><b>modulo</b></a>
+    <a href="https://docs.google.com/a/aci.it/forms/d/e/1FAIpQLSeiJnA5zt7cUDn7FduNEKLoBeQ_A_SS1L1-hxMRK6nMj679gg/viewform" target=”_blank”><b>modulo</b></a>
     </p>
   </div>
 <body onload="renderTable()"> <!--carica i dati nella tabella-->
@@ -35,6 +36,8 @@
 <!-- *********************************************************************************************************  -->
 <!-- chiamata al file JS lato Client -->
 <?!= HtmlService.createHtmlOutputFromFile('javascript').getContent(); ?>
+<!-- ?!= HtmlService.createHtmlOutputFromFile('javascript_child').getContent(); ? -->
+
 
 
 
