@@ -1,0 +1,125 @@
+<script>
+/* 
+estensione Responsive per DataTable jQuery è un ottimo strumento per risolvere 
+il problema della visualizzazione di grandi quantità di dati 
+tabellari per i dispositivi a schermo più piccoli. 
+*/
+    function renderTable(){
+
+       $('#myTb').empty();
+
+        google.script.run
+        .withSuccessHandler(onReadData)
+        .readData()
+  }    
+       window.onReadData = function(dataObject){
+
+/*
+   $(document).ready(function format (d) {
+   // `d` is the original data object for the row
+   var childRow = $('tr').DataTable{
+
+      data: d.table,
+      
+      columns: [ 
+         { data: 'Attivita1', title: "Contesto 1" },
+         { data: 'Tipo1', title: "Tipo 1", className: 'shown'},
+         { data: 'Documento 1 ', title: "Documento 1", className: 'shown' }, // can be null or undefined
+         { data: 'Attivita2', title: "Contesto 2", className: 'shown'},
+         { data: 'Tipo2', title: "Tipo 2", className: 'shown'},
+         { data: 'Documento2', title: "Documento 2", className: 'shown' }, 
+         ],
+   
+     },
+     Logger.log(childRow);
+     return childRow ;
+  */   
+
+// configurazione avanzata: 
+     $(document).ready(function (){
+  
+      var myTb = $('#myTb').DataTable({
+
+      data: dataObject.table,
+      
+     // se nel DOM esiste solo un tag <table> senza <thead>
+     // si possono visualizzare liberamente le colonne che si vogliono 
+     // cambiando l'ordine degli elementi in columns, cambia l'ordine di visualizzazione in tabella 
+       
+       scrollY:'50vh', // abilita la barra di scorrimento verticale all'interno della tabella 
+       scrollCollapse: true,
+       scrollX: true, // abilita la barra di scorrimento orizzontale all'interno della tabella 
+       paging: true, // abilita disabilita la paginazione della tabella
+       ordering: true, // abilita disabilita l'ordinamento nelle colonne
+       // order: [[0,"asc"],[1,"desc"],[2,"asc"]], // configura le regole di ordinamento per colonna
+
+      responsive: [ { details: { type: 'column', target: 0 } }, ],
+      
+      columns: [ 
+         { data: null, className: 'details-control', orderable: false,  defaultContent: '' }, // pulsante child-row-control
+         { data: 'Indirizzo email', title: "Account"},
+         { data: 'Data Evento', title: "Data Evento" }, 
+         { data: 'Località', title: "Località"},
+         { data: 'Scelta contesto', title: "Obiettivo"},
+         { data: 'Update', title: "Modifica"},  
+         // child.row 
+         { data: 'Attivita1', title: "Contesto 1"},
+         { data: 'Attivita2', title: "Contesto 2"},
+         
+         ],
+      columnDefs: [ 
+      //  { targets: '_all', visible: true, "searchable": true },
+      // colonna Modifica          
+        { targets: [5], render: function ( data, type, row) {
+              return '<a href="'+data+'" target=\"_blank\" align="center"><button>Edit</button></a>'; } },
+      // colonna Data Evento 
+        { targets: [2], render: function ( data, type, row ) { return data.substr( 5, 16 ); } }
+        ],    
+      });   
+  });
+}  // closure of window.onReadData = function(dataObject){ ..
+
+
+
+  //  ********************* gestione pulsante child-row *****************
+  //  Add event listener for opening and closing details
+  $('#myTb tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+  // controllo visibilità della child.row
+        if ( row.child.isShown() ) { 
+            row.child.hide(); // This row is already open - close it
+            tr.removeClass('shown');
+        }
+        else {      
+        row.child( format(row.data()) ).show(); // Open this row
+        tr.addClass('shown');
+        }
+   } )
+
+
+
+// ****************** FUNZIONE CHE SOSTITUISCE LE AUTOPOPUP DI DEFAULT PER GLI ALERT *******************************    
+ function autoPopup(alertMessage) {
+  var w = 400
+  var h = 200
+  var left = (screen.width/2)-(w/2);
+  var top = (screen.height/2)-(h/2);
+  var stili = "top="+top+", left="+left+", width="+w+", height="+h+", toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no";
+  var testo = window.open("", "", stili);
+    
+  testo.document.write("<html>\n");
+  testo.document.write(" <head>\n");
+  testo.document.write("  <title>Operazione non valida</title>\n");
+  var style= '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'
+  testo.document.write(style)
+  testo.document.write("  <basefont size=2 face=Arial>\n");
+  testo.document.write(" </head>\n");
+  testo.document.write("<body topmargin=50>\n");
+  testo.document.write("<div align=center><br>"+ alertMessage +"</a></div>\n");
+  var buttonHtml = "<input type='button' class='btn btn-secondary' name='OK' value='OK' onclick='window.close()'>"
+  testo.document.write("<div align=center><br>"+ buttonHtml +"</a></div>\n");
+  testo.document.write("</body>\n");
+  testo.document.write("</html>");
+ }
+</script>

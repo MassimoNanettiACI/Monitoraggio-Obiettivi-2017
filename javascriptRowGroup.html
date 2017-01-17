@@ -1,0 +1,140 @@
+<script>
+// ****************** FUNZIONE CHE RENDERIZZA LA TABELLA FILTRATA CON IL PLUG_IN DATATABLES ****************************
+    function renderTable(){
+
+       $('#myTb').empty();
+
+        google.script.run
+        .withSuccessHandler(onReadData)
+        .readData()
+  }    
+      window.onReadData = function(dataObject){
+        $(document).ready(function (){
+        var myTb = $('#myTb').DataTable({
+        
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ],
+        
+        
+        columnDefs: [
+
+          { targets: [1], render: function ( data, type, row ) { return data.substr( 5, 16 ); } }, // colonna Data Evento 
+          { targets: [2], visible: true },
+        // colonna Documento 1    
+          { targets: [6], render: function ( data, type, row) { 
+            if (data != "" ) { 
+            return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
+            else return ('')} },
+        // colonna Documento 2                      
+          { targets: [9], render: function ( data, type, row) {
+            if (data != "" ) {        
+            return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
+            else return ('') } },
+        // colonna Edit Button 
+          { targets: [10], render: function ( data, type, row) { return '<a href="'+data+'" target=\"_blank\" align="center"><button>Edit</button></a>'; } },
+        ],
+
+        columns: [
+          { data: 'Indirizzo email', title: "Account"},
+          { data: 'Data Evento', title: "Data Evento" }, 
+          { data: 'Località', title: "Località"},
+          { data: 'Scelta contesto', title: "Obiettivo"},
+          { data: 'Attivita1', title: "Contesto 1", visible: false},
+          { data: 'Tipo1', title: "Tipo 1", visible: false},
+          { data: 'Documento1 ', title: "Documento 1", visible: true }, // can be null or undefined
+          { data: 'Attivita2', title: "Contesto 2", visible: false},
+          { data: 'Tipo2', title: "Tipo 2", visible: false},
+          { data: 'Documento2', title: "Documento 2", visible: false}, 
+          { data: 'Update', title: "Modifica"},
+        ],
+        
+          data: dataObject.table,
+          scrollingCollapse: true,
+          scrollY: true,
+          scrollX: true,
+          paging: true,
+          order: [[ 2, 'asc' ]],
+          displayLength: 10,
+          
+        // Datatables Row grouping
+          drawCallback: function ( settings ) {
+                   
+            var api = this.api();
+            var rows = api.rows( {page:'current'} ).nodes();
+            var last=null;
+ 
+            api.column(2, {page:'current'} ).data().each( function ( group, i ) {
+                if ( last !== group ) {
+                    $(rows).eq( i ).before(
+                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+                    );
+                    last = group;
+                }
+            } );
+         // Order by the grouping
+           $('#example tbody').on( 'click', 'tr.group', function () {
+             var currentOrder = table.order()[0];
+             if ( currentOrder[0] === 2 && currentOrder[1] === 'asc' ) {
+              table.order( [ 2, 'desc' ] ).draw();
+            }
+            else {
+            table.order( [ 2, 'asc' ] ).draw();
+            }
+            } );
+         // end Order by Grouping
+    
+         // Extensions (Buttons, Filtering, ecc)
+      
+      /*    initComplete: function (api) {
+      //     var api = this.api();
+           new $.fn.dataTable.Buttons(api, {buttons: [
+             'pdfHtml5', 
+             'copyHtml5', 
+             'csvHtml5', 
+              ]
+            });
+            api.buttons().container().appendTo( '#' + api.table().container().id + ' .col-sm-6:eq(0)' );
+            }
+            */
+        // end PDF button   
+    
+ 
+}
+
+ 
+
+});});};
+
+
+ // ****************** FUNZIONE CHE SOSTITUISCE LE AUTOPOPUP DI DEFAULT PER GLI ALERT *******************************    
+ function autoPopup(alertMessage) {
+  var w = 400
+  var h = 200
+  var left = (screen.width/2)-(w/2);
+  var top = (screen.height/2)-(h/2);
+  var stili = "top="+top+", left="+left+", width="+w+", height="+h+", toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no";
+  var testo = window.open("", "", stili);
+    
+  testo.document.write("<html>\n");
+  testo.document.write(" <head>\n");
+  testo.document.write("  <title>Operazione non valida</title>\n");
+  var style= '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'
+  testo.document.write(style)
+  testo.document.write("  <basefont size=2 face=Arial>\n");
+  testo.document.write(" </head>\n");
+  testo.document.write("<body topmargin=50>\n");
+  testo.document.write("<div align=center><br>"+ alertMessage +"</a></div>\n");
+  var buttonHtml = "<input type='button' class='btn btn-secondary' name='OK' value='OK' onclick='window.close()'>"
+  testo.document.write("<div align=center><br>"+ buttonHtml +"</a></div>\n");
+  testo.document.write("</body>\n");
+  testo.document.write("</html>");
+ }
+ 
+ // ******************************************
+
+</script>

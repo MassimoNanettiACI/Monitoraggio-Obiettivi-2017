@@ -20,12 +20,12 @@
       var myTb = $('#myTb').DataTable({
 
       data: dataObject.table,
-      
-      
+
      // se nel DOM esiste solo un tag <table> senza <thead>
      // si possono visualizzare liberamente le colonne che si vogliono 
      // cambiando l'ordine degli elementi in columns, cambia l'ordine di visualizzazione in tabella 
        responsive: false,
+       autoWidth: true,
        scrollY:'50vh', // abilita la barra di scorrimento verticale all'interno della tabella 
        scrollCollapse: true,
        scrollX: true, // abilita la barra di scorrimento orizzontale all'interno della tabella 
@@ -37,49 +37,43 @@
           { data: 'Data Evento', title: "Data Evento" }, 
           { data: 'Località', title: "Località"},
           { data: 'Scelta contesto', title: "Obiettivo"},
-          { data: 'Attivita1', title: "Contesto 1"},
-          { data: 'Tipo1', title: "Tipo 1"},
-          { data: 'Documento1 ', title: "Documento 1" }, // can be null or undefined
-          { data: 'Attivita2', title: "Contesto 2"},
-          { data: 'Tipo2', title: "Tipo 2"},
-          { data: 'Documento2', title: "Documento 2" }, 
+          { data: 'Attivita1', title: "Contesto 1", visible: false},
+          { data: 'Tipo1', title: "Tipo 1", visible: false},
+          { data: 'Documento1 ', title: "Documento 1", visible: false }, // can be null or undefined
+          { data: 'Attivita2', title: "Contesto 2", visible: false},
+          { data: 'Tipo2', title: "Tipo 2", visible: false},
+          { data: 'Documento2', title: "Documento 2", visible: false}, 
           { data: 'Update', title: "Modifica"},  
           ],
           
         columnDefs: [ 
           { targets: '_all', visible: true, "searchable": true },
+          // colonna Data Evento 
+          { targets: [1], render: function ( data, type, row ) { return data.substr( 5, 16 ); } },
           // colonna Documento 1    
           { targets: [6], render: function ( data, type, row) { 
             if (data != "" ) { 
             return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
-            else
-            return ('')} },
+            else return ('')} },
           // colonna Documento 2                      
           { targets: [9], render: function ( data, type, row) {
             if (data != "" ) {        
             return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
-            else
-            return ('') } },
+            else return ('') } },
           // colonna Edit Button 
-          { targets: [10], render: function ( data, type, row) {
-              return '<a href="'+data+'" target=\"_blank\" align="center"><button>Edit</button></a>'; } },
-          // colonna Data Evento 
-          { targets: [1], render: function ( data, type, row ) { return data.substr( 5, 16 ); } }
-          
-         ],
-       // Extensions (Buttons, Filtering, ecc)
+          { targets: [10], render: function ( data, type, row) { return '<a href="'+data+'" target=\"_blank\" align="center"><button>Edit</button></a>'; } },
+          ],
+         
+// Extensions (Buttons, Filtering, ecc)
 
 // filtri di colonna sul footer (da far funzionare )
 
-       //**************************************************************************     
+//**************************************************************************     
       
       initComplete: function () {
          var api = this.api();
          
-         // filtri di colonna sul footer (da far funzionare )
-  
-
-// **************         
+      // filtri di colonna sul footer (da far funzionare )
          api.columns().every( function () {
            var column = this;
            console.log(column)
@@ -97,8 +91,8 @@
              column.data().unique().sort().each( function ( d, j ) {
                select.append( '<option value="'+d+'">'+d+'</option>' )
              } );   
-   
          } );
+         
 // *********************************** bottone PDF (OK !)
 
          new $.fn.dataTable.Buttons(api, {
@@ -110,39 +104,11 @@
          });
          api.buttons().container().appendTo( '#' + api.table().container().id + ' .col-sm-6:eq(0)' );
        }
-    })
-    .columns.adjust()
-    .responsive.recalc();
+    }).columns.adjust().responsive //.recalc();
  });
 };
 
 
- // ****************** FUNZIONE CHE SOSTITUISCE LE AUTOPOPUP DI DEFAULT PER GLI ALERT *******************************    
- function autoPopup(alertMessage) {
-  var w = 400
-  var h = 200
-  var left = (screen.width/2)-(w/2);
-  var top = (screen.height/2)-(h/2);
-  var stili = "top="+top+", left="+left+", width="+w+", height="+h+", toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no";
-  var testo = window.open("", "", stili);
-    
-  testo.document.write("<html>\n");
-  testo.document.write(" <head>\n");
-  testo.document.write("  <title>Operazione non valida</title>\n");
-  var style= '<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'
-  testo.document.write(style)
-  testo.document.write("  <basefont size=2 face=Arial>\n");
-  testo.document.write(" </head>\n");
-  testo.document.write("<body topmargin=50>\n");
-  testo.document.write("<div align=center><br>"+ alertMessage +"</a></div>\n");
-  var buttonHtml = "<input type='button' class='btn btn-secondary' name='OK' value='OK' onclick='window.close()'>"
-  testo.document.write("<div align=center><br>"+ buttonHtml +"</a></div>\n");
-  testo.document.write("</body>\n");
-  testo.document.write("</html>");
- }
- 
- 
- // ******************************************
 
  
 </script>
