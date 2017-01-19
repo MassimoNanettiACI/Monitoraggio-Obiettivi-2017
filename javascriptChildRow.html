@@ -113,17 +113,28 @@
 
 </script>
 <script>
-function format ( d ) {
-    // `d` is the original data object for the row
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-        '<tr>'+
-            '<td>Attività 1:</td>'+
-            '<td>'+d.Attivita1+'</td>'+
-            '<td>Tipo 1:</td>'+
-            '<td>'+d.Tipo1+'</td>'+
-            '<td>Documento 1:</td>'+
+   function format ( d ) {
+     return '<table cellpadding="5" cellspacing="10" border="0" style="padding-left:50px;">'+
+            '<tr">'+
+            '<td width="30%" bgcolor="#cbe368">Attività 1:</td>'+
+            '<td >'+d.Attivita1+'</td>'+
+            '<td width="30%" bgcolor="##cbc9a8">Attività 2:</td>'+
+            '<td>'+d.Attivita2+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td width="30%" bgcolor="#cbe368">Tipo 1:</td>'+
+            '<td >'+d.Tipo1+'</td>'+
+            '<td width="30%" bgcolor="##cbc9a8">Tipo 2:</td>'+
+            '<td>'+d.Tipo2+'</td>'+
+            '</tr>'+
+            '<tr>'+            
+            '<td width="30%" bgcolor="#cbe368">Documento 1:</td>'+
             '<td>'+d.Documento1+'</td>'+
-        '</tr>'+
-    '</table>';
-}
+            '<td width="30%" bgcolor="##cbc9a8">Documento 2:</td>'+
+            '<td>'+d.Documento2+'</td>'+
+            '</tr>'+
+            '</table>';
+             } 
+
+    // `d` is the original data object for the row
 </script>
