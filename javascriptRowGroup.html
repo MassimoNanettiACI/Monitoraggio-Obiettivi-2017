@@ -12,14 +12,13 @@
         $(document).ready(function (){
         var myTb = $('#myTb').DataTable({
         
-        dom: 'Bfrtip',
+        dom: 'lpBfrtip',
         buttons: [
             'copyHtml5',
             'excelHtml5',
             'csvHtml5',
             'pdfHtml5'
         ],
-        
         
         columnDefs: [
 
@@ -49,8 +48,8 @@
           { data: 'Documento1 ', title: "Documento 1", visible: true }, // can be null or undefined
           { data: 'Attivita2', title: "Contesto 2", visible: false},
           { data: 'Tipo2', title: "Tipo 2", visible: false},
-          { data: 'Documento2', title: "Documento 2", visible: false}, 
-          { data: 'Update', title: "Modifica"},
+          { data: 'Documento2', title: "Documento 2", visible: true}, 
+          { data: 'Update', title: "Modifica", visible: true},
         ],
         
           data: dataObject.table,
@@ -71,13 +70,13 @@
             api.column(2, {page:'current'} ).data().each( function ( group, i ) {
                 if ( last !== group ) {
                     $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+                        '<tr class="group"><td colspan="12">'+group+'</td></tr>'
                     );
                     last = group;
                 }
             } );
          // Order by the grouping
-           $('#example tbody').on( 'click', 'tr.group', function () {
+           $('#myTb tbody').on( 'click', 'tr.group', function () {
              var currentOrder = table.order()[0];
              if ( currentOrder[0] === 2 && currentOrder[1] === 'asc' ) {
               table.order( [ 2, 'desc' ] ).draw();
@@ -100,8 +99,9 @@
             });
             api.buttons().container().appendTo( '#' + api.table().container().id + ' .col-sm-6:eq(0)' );
             }
-            */
-        // end PDF button   
+            
+        // end PDF button  
+        */
     
  
 }

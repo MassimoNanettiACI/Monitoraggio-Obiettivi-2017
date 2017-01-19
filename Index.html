@@ -2,14 +2,13 @@
 <html>
   <head>
     <base target="_top">
-    <!-- configurazione delle librerie: "Settings.html"  -->
-    <?!= HtmlService.createHtmlOutputFromFile('Settings CSS').getContent(); ?>
-    <!-- ?!= HtmlService.createHtmlOutputFromFile('Settings CSS Child Row').getContent(); ? -->
-
+    
+    <?!= HtmlService.createHtmlOutputFromFile('SettingsCSS').getContent(); ?>
+    <!--?!= HtmlService.createHtmlOutputFromFile('SettingsCSSChildRow').getContent(); ?-->
 
   </head>
 <!-- *********************************************************************************************************  -->
-<div id="resizable" class="container-fluid ui-widget-content">
+<div id="resizable" class="container-fluid">
   <div class="jumbotron">
      <h1>Monitoraggio Progetti/Obiettivi SSI 2017</h1>
     <p align = "center">Nel campo <em>Search:</em> filtra con il criterio desiderato
@@ -35,9 +34,8 @@
 
 <!-- *********************************************************************************************************  -->
 <!-- chiamata al file JS lato Client -->
-<?!= HtmlService.createHtmlOutputFromFile('javascriptRowGroup').getContent(); ?>
-<!-- ?!= HtmlService.createHtmlOutputFromFile('javascript').getContent(); ? -->
-<!-- ?!= HtmlService.createHtmlOutputFromFile('javascriptChildRow').getContent(); ? -->
+<!--?!= HtmlService.createHtmlOutputFromFile('javascriptRowGroup').getContent(); ?-->
+<?!= HtmlService.createHtmlOutputFromFile('javascriptChildRow').getContent(); ?>
 
 
 
