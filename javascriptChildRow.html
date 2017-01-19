@@ -93,7 +93,7 @@
            console.log(this)
             
               var tr = $(this).closest('tr');
-              var row = table.row( tr );
+              var row = myTb.row( tr );
  
               if ( row.child.isShown() ) {
          // This row is already open - close it
@@ -102,7 +102,7 @@
               }
               else {
          // Open this row
-              console.log(row)
+              // console.log(row)
               row.child( format(row.data()) ).show();
               tr.addClass('shown');} 
 		      });
@@ -111,5 +111,19 @@
 });
 }
 
-
+</script>
+<script>
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Attività 1:</td>'+
+            '<td>'+d.Attivita1+'</td>'+
+            '<td>Tipo 1:</td>'+
+            '<td>'+d.Tipo1+'</td>'+
+            '<td>Documento 1:</td>'+
+            '<td>'+d.Documento1+'</td>'+
+        '</tr>'+
+    '</table>';
+}
 </script>
