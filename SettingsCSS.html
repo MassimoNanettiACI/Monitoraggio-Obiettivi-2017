@@ -1,18 +1,24 @@
-     <!--link rel="stylesheet" type="text/css" href="styleCSS.html"-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    
+ 
     <!-- This CSS package applies Google styling; it should always be included. -->
     <!--link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css"-->
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <!-- link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" -->
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script -->
+    
+    <!--bootstrap-Table-->
+    <!-- link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"/ -->
+    <!-- link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css"/ -->
+    <!-- script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script -->
+
+    <!--link rel="stylesheet" type="text/css" href="styleCSS.html"-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+     type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     
      <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
@@ -31,15 +37,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.12/filtering/row-based/range_numbers.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.12/filtering/row-based/TableTools.ShowSelectedOnly.js"></script-->
     
-    
     <!-- PDFmake (for Buttons Extensions)-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.20/pdfmake.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.20/vfs_fonts.js"></script>
-    
-    <!--bootstrap-Table-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.css"/>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>
     
     <!-- Datatables responsive -->
     <style> 
@@ -55,12 +55,7 @@
        }
     </style>
 
-     <!-- Child Row plugin settings -->
-     
-     <!-- link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-1.10.12/r-2.1.0/se-1.2.0/datatables.min.css" -->
-     <!-- script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script -->
-     <!-- script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/r-2.1.0/se-1.2.0/datatables.min.js"></script -->
-
+    <!-- Child Row plugin settings -->
     <style>  
        td.details-control {
        background: url('https://next.datatables.net/examples/resources/details_open.png') no-repeat center center;
@@ -68,6 +63,15 @@
        }
        tr.shown td.details-control {
        background: url('https://next.datatables.net/examples/resources/details_close.png') no-repeat center center;
-       }   
+       }  
+       tr.shown td.details-control td.child1 {
+       width: "30%"; 
+       background: "#cbe368";
+       }
+       tr.shown td.details-control td.child2 {
+       width: "30%"; 
+       background: "#cbc9a8";
+       }
+       
     </style>
 

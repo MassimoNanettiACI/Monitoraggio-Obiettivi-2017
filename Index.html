@@ -8,17 +8,32 @@
 
   </head>
 <!-- *********************************************************************************************************  -->
-<div id="resizable" class="container-fluid">
-  <div class="jumbotron">
-     <h1>Monitoraggio Progetti/Obiettivi SSI 2017</h1>
-    <p align = "center">Nel campo <em>Search:</em> filtra con il criterio desiderato
+ <div id ="resizable" class="jumbotron" align = "center">
+<!-- div id="resizable" class="container-fluid" -->
+ 
+    <button type="button" class="btn btn-secondary btn-lg btn-block"><h2 align = "center">Monitoraggio Progetti/Obiettivi SSI 2017</h2></button>
     <br>
-    per es. inserendo una Località e/o un account <em>spazio</em> = <em>"Viterbo m.volpi@aci.it"</em>
-    <br>
-    esporta poi il la tabella filtrata nel formato desiderato (PDF, COPY, CSV) 
-    <br>
-    Per inserire nuovi contenuti utilizza il 
-    <a href="https://docs.google.com/a/aci.it/forms/d/e/1FAIpQLSeiJnA5zt7cUDn7FduNEKLoBeQ_A_SS1L1-hxMRK6nMj679gg/viewform" target=”_blank”><b>modulo</b></a>
+    <p>
+    <button type="button" class="btn btn-outline-secondary">Search:</button> filtro tabella es.<em>"Viterbo m.volpi@aci.it"</em> , 
+    <button type="button" class="btn btn-outline-secondary">PDF</button>
+    <button type="button" class="btn btn-outline-secondary">COPY</button>
+    <button type="button" class="btn btn-outline-secondary">CSV</button> 
+    pulsanti per esportare</p>
+    <p>
+    il 
+    <button>  
+    <a class="btn btn-primary" href="https://docs.google.com/a/aci.it/forms/d/e/1FAIpQLSf3KgJQPyTjvnXCrenx-13R9YwC2Ce_gOv2N2X4asekFpRDOQ/viewform" target=”_blank”><b>modulo</b></a>
+    </button>
+    è collegato alla  
+    <button> <a class="btn btn-info" href="https://sites.google.com/a/aci.it/agora-ssi/monitoraggi/monitor-2017" target=”_blank”><b>tabella</b></a>
+    </button>
+    </p>
+    <p>
+    il pulsante 
+    <button>
+    <a class="btn btn-danger" href="https://docs.google.com/a/aci.it/forms/d/e/1FAIpQLSeiJnA5zt7cUDn7FduNEKLoBeQ_A_SS1L1-hxMRK6nMj679gg/viewform" target=”_blank”><b>modulo (superato)</b></a>
+    </button>
+    rimanda al modulo basic per verificare la tabella sottostante.
     </p>
   </div>
 <body onload="renderTable()"> <!--carica i dati nella tabella-->
@@ -29,7 +44,6 @@
   </div>
 </div>
 </body>
-</div>
 </html>
 
 <!-- *********************************************************************************************************  -->

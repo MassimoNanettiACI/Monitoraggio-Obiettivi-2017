@@ -112,29 +112,104 @@
 }
 
 </script>
+
+<!-- ************************************************************************************************************* -->
+
 <script>
    function format ( d ) {
-     return '<table cellpadding="5" cellspacing="10" border="0" style="padding-left:50px;">'+
+/*   
+   console.log("A1: " + d.Attivita1);
+   console.log("A2: " + d.Attivita2);
+   
+        $(document).ready(function (){
+        var myTbChild = $('#myTb').DataTable({
+        
+          columnDefs: [
+
+       // colonna Documento 1    
+          { targets: [7], render: function ( d, type, row) { 
+            if (data != "" ) { 
+            return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
+            else return ('')} },
+        // colonna Documento 2                      
+          { targets: [10], render: function ( d, type, row) {
+            if (data != "" ) {        
+            return '<a href="'+data+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30"></a>'; }
+            else return ('') } },
+          
+          ],
+
+        columns: [
+          
+          { data: 'Scelta contesto', title: "Obiettivo", visible: false},
+          { data: 'Attivita1', title: "Contesto 1"},
+          { data: 'Tipo1', title: "Tipo 1"},
+          { data: 'Documento1 ', title: "Documento 1"}, 
+          { data: 'Attivita2', title: "Contesto 2"},
+          { data: 'Tipo2', title: "Tipo 2"},
+          { data: 'Documento2', title: "Documento 2"}, 
+          { data: 'Update', title: "Modifica"},
+          
+          ],
+        
+   // Logger.log(d([0][1]));
+   // Logger.log(d([0][2]));
+   
+     if (d.Attivita2 !== undefined){
+
+console.log("Sezione A2: " + d.Attivita2);
+*/
+ console.log(d.Documento2);
+
+          return '<table class="table tbody table-striped table-bordered display dataTable" cellpadding="5" cellspacing="10" border="0" style="padding-left:50px;">'+
             '<tr">'+
-            '<td width="30%" bgcolor="#cbe368">Attività 1:</td>'+
-            '<td >'+d.Attivita1+'</td>'+
-            '<td width="30%" bgcolor="##cbc9a8">Attività 2:</td>'+
+            '<td>Attività 1:</td>'+
+            '<td>'+d.Attivita1+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Tipo 1:</td>'+
+            '<td>'+d.Tipo1+'</td>'+
+            '</tr>'+
+            '<tr>'+            
+            '<td>Documento 1:</td>'+
+            '<td>'+'<a href="'+d.Documento1+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30">'+'</a>'+'</td>'+            '</tr>'+
+            '<tr">'+
+            '<td>Attività 2:</td>'+
             '<td>'+d.Attivita2+'</td>'+
             '</tr>'+
             '<tr>'+
-            '<td width="30%" bgcolor="#cbe368">Tipo 1:</td>'+
-            '<td >'+d.Tipo1+'</td>'+
-            '<td width="30%" bgcolor="##cbc9a8">Tipo 2:</td>'+
+            '<td>Tipo 2:</td>'+
             '<td>'+d.Tipo2+'</td>'+
             '</tr>'+
             '<tr>'+            
-            '<td width="30%" bgcolor="#cbe368">Documento 1:</td>'+
+            '<td>Documento 2:</td>'+
+            '<td>'+'<a href="'+d.Documento2+'" target=\"_blank\" align="center"><img border="0" alt="Edit" src="https://c2.staticflickr.com/8/7014/6436110129_0ae969e102.jpg" width="30" height="30">'+'</a>'+'</td>'+
+            '</tr>'+
+            '</table>';
+            
+            
+ /*              }; 
+             else
+
+            
+             if (d.Attivita1 !== undefined){
+                console.log("Sezione A1: " + d.Attivita2)
+     return '<table cellpadding="5" cellspacing="10" border="0" style="padding-left:50px;">'+
+            '<tr">'+
+            '<td>Attività 1:</td>'+
+            '<td>'+d.Attivita1+'</td>'+
+            '</tr>'+
+            '<tr>'+
+            '<td>Tipo 1:</td>'+
+            '<td>'+d.Tipo1+'</td>'+
+            '</tr>'+
+            '<tr>'+            
+            '<td>Documento 1:</td>'+
             '<td>'+d.Documento1+'</td>'+
-            '<td width="30%" bgcolor="##cbc9a8">Documento 2:</td>'+
-            '<td>'+d.Documento2+'</td>'+
             '</tr>'+
             '</table>';
              } 
-
+       */      
+}
     // `d` is the original data object for the row
 </script>
